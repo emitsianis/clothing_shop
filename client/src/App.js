@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import Landing from "./components/Landing";
 import Main from "./components/Main";
 import TagedItems from "./components/TagedItems";
+import DisplayItem from "./components/DisplayItem";
 
 import "./App.css";
 
@@ -17,8 +18,8 @@ class App extends Component {
           <Route exact path="/" component={Landing} />
           <div className="container">
             <Route exact path="/main" component={Main} />
-            {/* <Route exact path="/items" component={AllItems} /> */}
             <Route exact path="/tagitems/:tag" component={TagedItems} />
+            <Route exact path="/displayitem/:name" component={DisplayItem} />
           </div>
         </div>
       </Router>

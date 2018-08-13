@@ -35,14 +35,16 @@ class AllItems extends Component {
     }
 
     content =
-      filteredFiles.length > 0
-        ? filteredFiles.map(file => <ImageItem key={file._id} file={file} />)
-        : null;
+      filteredFiles.length > 0 ? (
+        filteredFiles.map(file => <ImageItem key={file._id} file={file} />)
+      ) : (
+        <h2>No items matching search term</h2>
+      );
 
     return (
       <div className="row">
         <div className="col-md-12">
-          <div className="container image-container">{content}</div>
+          <div className="image-container">{content}</div>
         </div>
       </div>
     );

@@ -5,10 +5,11 @@ import { Link } from "react-router-dom";
 class ImageItem extends Component {
   render() {
     const source = `/image/${this.props.file.filename}`;
+    const destination = `/displayitem/${this.props.file.filename}`;
 
     return (
       <div className="img-font">
-        <Link to="/allitems">
+        <Link to={destination}>
           <img className="item-img" alt="item" src={source} />
         </Link>
         <h3>

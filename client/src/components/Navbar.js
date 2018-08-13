@@ -2,6 +2,22 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
 class Navbar extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      tag: ""
+    };
+  }
+
+  onChange(e) {
+    this.setState({ tag: e.target.value });
+  }
+
+  onSubmitClick(e) {
+    e.preventDefault();
+    window.location.href = `/tagitems/${this.state.tag}`;
+  }
+
   render() {
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -38,12 +54,17 @@ class Navbar extends Component {
               </Link>
             </li>
           </ul>
-          <form className="form-inline my-2 my-lg-0">
+          <form
+            className="form-inline my-2 my-lg-0"
+            onSubmit={this.onSubmitClick.bind(this)}
+          >
             <input
               className="form-control mr-sm-2"
               type="search"
               placeholder="Search"
               aria-label="Search"
+              value={this.state.tag}
+              onChange={this.onChange.bind(this)}
             />
             <button className="btn btn-outline-dark my-2 my-sm-0" type="submit">
               Search

@@ -12,6 +12,35 @@ img {
   border-radius: 3%;
 }
 
+.item-display {
+  display: grid;
+  grid-gap: 30px;
+  grid-template-areas:
+    "picture info"
+    "picture info";
+  grid-template-columns: repeat(2, 1fr);
+  margin: 2em 0 2em 0;
+  border-radius: 3%;
+  padding: 1em;
+}
+
+.item-display-image {
+  grid-area: picture;
+  margin: 2em 0 2em 0;
+  border: 1px solid #ddd;
+}
+
+.item-display-info {
+  padding: 1em;
+  border-radius: 0%;
+  grid-area: info;
+  margin-top: 2em;
+}
+
+.item-display-image img {
+  border-radius: 0%;
+}
+
 .landing {
   position: relative;
   background: url("./img/showcase.jpg") no-repeat;
@@ -39,4 +68,19 @@ img {
   display: grid;
   grid-gap: 30px;
   grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 500px) {
+  .image-container {
+    display: block;
+  }
+
+  .item-display {
+    display: block;
+  }
+
+  .item-img {
+    height: 240px;
+    width: 230px;
+  }
 }
