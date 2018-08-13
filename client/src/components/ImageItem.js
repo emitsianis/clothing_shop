@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 class ImageItem extends Component {
   render() {
-    const source = `image/${this.props.file.filename}`;
+    const source = `/image/${this.props.file.filename}`;
 
     return (
       <div className="img-font">

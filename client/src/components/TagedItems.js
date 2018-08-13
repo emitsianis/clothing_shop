@@ -21,12 +21,22 @@ class AllItems extends Component {
   }
 
   render() {
+    const { tag } = this.props.match.params;
     const { files } = this.state;
     let content;
+    let filteredFiles;
+
+    if (tag === "all") {
+      filteredFiles = files;
+    } else {
+      filteredFiles = files.filter(
+        file => file.metadata.tags.split(" ").indexOf(tag) > -1
+      );
+    }
 
     content =
-      files.length > 0
-        ? files.map(file => <ImageItem key={file._id} file={file} />)
+      filteredFiles.length > 0
+        ? filteredFiles.map(file => <ImageItem key={file._id} file={file} />)
         : null;
 
     return (
