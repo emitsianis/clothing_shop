@@ -1,7 +1,13 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { removeItem } from "../actions/basketActions";
 
 class BasketItem extends Component {
+  onRemoveClick(id) {
+    this.props.removeItem(id);
+  }
+
   render() {
     const { item } = this.props;
     const source = `/image/${item.filename}`;
@@ -31,8 +37,11 @@ class BasketItem extends Component {
             </div>
           ) : null}
           <hr />
-          <button className="btn btn-danger">
-            Remove from Basket <i class="fas fa-cart-arrow-down" />
+          <button
+            onClick={this.onRemoveClick.bind(this, item._id)}
+            className="btn btn-danger"
+          >
+            Remove from Basket <i className="fas fa-cart-arrow-down" />
           </button>
         </div>
       </div>
@@ -41,7 +50,11 @@ class BasketItem extends Component {
 }
 
 BasketItem.propTypes = {
-  item: PropTypes.object.isRequired
+  item: PropTypes.object.isRequired,
+  removeItem: PropTypes.func.isRequired
 };
 
-export default BasketItem;
+export default connect(
+  null,
+  { removeItem }
+)(BasketItem);

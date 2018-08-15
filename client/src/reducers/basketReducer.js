@@ -11,6 +11,11 @@ export default function(state = initialState, action) {
         ...state,
         items: [...state.items, action.payload]
       };
+    case REMOVE_ITEM:
+      return {
+        ...state,
+        items: state.items.filter(item => item._id !== action.payload)
+      };
     default:
       return state;
   }

@@ -6,3 +6,10 @@ export const addItem = item => dispatch => {
     payload: item
   });
 };
+
+export const removeItem = id => dispatch => {
+  dispatch({
+    type: REMOVE_ITEM,
+    payload: id
+  });
+};
