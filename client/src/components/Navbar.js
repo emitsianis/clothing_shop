@@ -53,6 +53,11 @@ class Navbar extends Component {
                 Women's Clothing
               </Link>
             </li>
+            <li className="nav-item">
+              <Link className="nav-link btn btn-warning" to="/basket">
+                View Basket <i className="fas fa-shopping-cart" />
+              </Link>
+            </li>
           </ul>
           <form
             className="form-inline my-2 my-lg-0"

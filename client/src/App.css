@@ -41,6 +41,11 @@ img {
   border-radius: 0%;
 }
 
+.basket-image {
+  max-height: 240px;
+  max-width: 230px;
+}
+
 .landing {
   position: relative;
   background: url("./img/showcase.jpg") no-repeat;

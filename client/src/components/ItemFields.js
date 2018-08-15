@@ -1,7 +1,13 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { addItem } from "../actions/basketActions";
 
 class ItemFields extends Component {
+  onAddItemClick(file) {
+    this.props.addItem(file);
+  }
+
   render() {
     const { file } = this.props;
     const source = `/image/${file.filename}`;
@@ -13,18 +19,34 @@ class ItemFields extends Component {
         </div>
         <div className="item-display-info">
           {file.metadata !== undefined ? (
-            <p>
+            <div>
               <h4>
                 {file.metadata.brand} {file.metadata.name}
               </h4>
-            </p>
+            </div>
           ) : null}
           <hr />
           {file.metadata !== undefined ? (
-            <p>
+            <div>
               <h4>Available sizes : {file.metadata.sizes}</h4>
-            </p>
+            </div>
           ) : null}
+          <hr />
+          {file.metadata !== undefined ? (
+            <div>
+              <h4>
+                Price : {file.metadata.price}
+                {"$"}
+              </h4>
+            </div>
+          ) : null}
+          <hr />
+          <button
+            onClick={this.onAddItemClick.bind(this, file)}
+            className="btn btn-warning"
+          >
+            Add to Basket <i className="fas fa-cart-plus" />
+          </button>
         </div>
       </div>
     );
@@ -32,7 +54,11 @@ class ItemFields extends Component {
 }
 
 ItemFields.propTypes = {
-  file: PropTypes.object.isRequired
+  file: PropTypes.object.isRequired,
+  addItem: PropTypes.func.isRequired
 };
 
-export default ItemFields;
+export default connect(
+  null,
+  { addItem }
+)(ItemFields);
