@@ -7,9 +7,9 @@ export const addItem = item => dispatch => {
   });
 };
 
-export const removeItem = id => dispatch => {
+export const removeItem = item => dispatch => {
   dispatch({
     type: REMOVE_ITEM,
-    payload: id
+    payload: item
   });
 };

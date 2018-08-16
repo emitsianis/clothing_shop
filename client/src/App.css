@@ -75,12 +75,23 @@ img {
   grid-template-columns: repeat(3, 1fr);
 }
 
+.basket-total {
+  border-radius: 3%/10%;
+  padding: 2em;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
 @media (max-width: 500px) {
   .image-container {
     display: block;
   }
 
   .item-display {
+    display: block;
+  }
+
+  .basket-total {
     display: block;
   }
 

@@ -4,8 +4,8 @@ import PropTypes from "prop-types";
 import { removeItem } from "../actions/basketActions";
 
 class BasketItem extends Component {
-  onRemoveClick(id) {
-    this.props.removeItem(id);
+  onRemoveClick(item) {
+    this.props.removeItem(item);
   }
 
   render() {
@@ -38,7 +38,7 @@ class BasketItem extends Component {
           ) : null}
           <hr />
           <button
-            onClick={this.onRemoveClick.bind(this, item._id)}
+            onClick={this.onRemoveClick.bind(this, item)}
             className="btn btn-danger"
           >
             Remove from Basket <i className="fas fa-cart-arrow-down" />
