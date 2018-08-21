@@ -4,12 +4,17 @@ import PropTypes from "prop-types";
 import { removeItem } from "../actions/basketActions";
 
 class BasketItem extends Component {
-  onRemoveClick(item) {
-    this.props.removeItem(item);
+  onRemoveClick(item, qty) {
+    const remItem = {
+      file: item,
+      qty: qty
+    };
+
+    this.props.removeItem(remItem);
   }
 
   render() {
-    const { item } = this.props;
+    const { item, qty } = this.props;
     const source = `/image/${item.filename}`;
 
     return (
@@ -37,8 +42,14 @@ class BasketItem extends Component {
             </div>
           ) : null}
           <hr />
+          {qty !== undefined ? (
+            <div>
+              <h4>Quantity : {qty}</h4>
+            </div>
+          ) : null}
+          <hr />
           <button
-            onClick={this.onRemoveClick.bind(this, item)}
+            onClick={this.onRemoveClick.bind(this, item, qty)}
             className="btn btn-danger"
           >
             Remove from Basket <i className="fas fa-cart-arrow-down" />
@@ -51,6 +62,7 @@ class BasketItem extends Component {
 
 BasketItem.propTypes = {
   item: PropTypes.object.isRequired,
+  qty: PropTypes.string.isRequired,
   removeItem: PropTypes.func.isRequired
 };
 

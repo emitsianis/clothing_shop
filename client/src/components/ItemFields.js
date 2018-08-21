@@ -4,8 +4,24 @@ import { connect } from "react-redux";
 import { addItem } from "../actions/basketActions";
 
 class ItemFields extends Component {
-  onAddItemClick(file) {
-    this.props.addItem(file);
+  constructor(props) {
+    super(props);
+    this.state = {
+      qty: "1"
+    };
+  }
+
+  onChange(e) {
+    this.setState({ qty: e.target.value });
+  }
+
+  onAddItemClick(file, qty) {
+    const newItem = {
+      file: file,
+      qty: qty
+    };
+
+    this.props.addItem(newItem);
   }
 
   render() {
@@ -41,8 +57,25 @@ class ItemFields extends Component {
             </div>
           ) : null}
           <hr />
+          <div className="input-group mb-3">
+            <div className="input-group-prepend">
+              <span className="input-group-text" id="basic-addon1">
+                Quantity
+              </span>
+            </div>
+            <input
+              value={this.state.qty}
+              onChange={this.onChange.bind(this)}
+              type="text"
+              className="form-control"
+              placeholder="Enter the desired quantity (1, 2, 3,...)"
+              aria-label="Username"
+              aria-describedby="basic-addon1"
+            />
+          </div>
+          <hr />
           <button
-            onClick={this.onAddItemClick.bind(this, file)}
+            onClick={this.onAddItemClick.bind(this, file, this.state.qty)}
             className="btn btn-warning"
           >
             Add to Basket <i className="fas fa-cart-plus" />

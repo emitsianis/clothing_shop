@@ -11,7 +11,9 @@ class ViewBasket extends Component {
 
     content =
       items.length > 0 ? (
-        items.map(item => <BasketItem item={item} key={item._id} />)
+        items.map(item => (
+          <BasketItem item={item.file} qty={item.qty} key={item.file._id} />
+        ))
       ) : (
         <h2 className="mt-2">No items in basket</h2>
       );

@@ -11,13 +11,17 @@ export default function(state = initialState, action) {
       return {
         ...state,
         items: [...state.items, action.payload],
-        total: state.total + action.payload.metadata.price
+        total:
+          state.total + action.payload.file.metadata.price * action.payload.qty
       };
     case REMOVE_ITEM:
       return {
         ...state,
-        items: state.items.filter(item => item._id !== action.payload._id),
-        total: state.total - action.payload.metadata.price
+        items: state.items.filter(
+          item => item.file._id !== action.payload.file._id
+        ),
+        total:
+          state.total - action.payload.file.metadata.price * action.payload.qty
       };
     default:
       return state;
