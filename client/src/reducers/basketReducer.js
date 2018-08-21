@@ -1,4 +1,4 @@
-import { ADD_ITEM, REMOVE_ITEM } from "../actions/types";
+import { ADD_ITEM, REMOVE_ITEM, INCREASE_QTY } from "../actions/types";
 
 const initialState = {
   items: [],
@@ -22,6 +22,19 @@ export default function(state = initialState, action) {
         ),
         total:
           state.total - action.payload.file.metadata.price * action.payload.qty
+      };
+    case INCREASE_QTY:
+      const newItems = state.items.map(
+        item =>
+          item.file._id !== action.payload.id
+            ? item
+            : { file: item.file, qty: item.qty + action.payload.qty }
+      );
+
+      return {
+        ...state,
+        items: newItems,
+        total: state.total + action.payload.qty * action.payload.price
       };
     default:
       return state;

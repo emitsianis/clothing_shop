@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { addItem } from "../actions/basketActions";
+import { addItem, increaseQty } from "../actions/basketActions";
 
 class ItemFields extends Component {
   constructor(props) {
@@ -15,18 +15,37 @@ class ItemFields extends Component {
     this.setState({ qty: e.target.value });
   }
 
-  onAddItemClick(file, qty) {
-    const newItem = {
-      file: file,
-      qty: qty
-    };
+  onAddItemClick(file, qty, added, price) {
+    if (!added) {
+      const newItem = {
+        file: file,
+        qty: parseInt(qty, 10)
+      };
 
-    this.props.addItem(newItem);
+      this.props.addItem(newItem);
+    } else {
+      const incItem = {
+        id: file._id,
+        qty: parseInt(qty, 10),
+        price: price
+      };
+
+      this.props.increaseQty(incItem);
+    }
   }
 
   render() {
-    const { file } = this.props;
+    let alreadyAdded = false;
+    let currentQty = 0;
+    const { file, items } = this.props;
     const source = `/image/${file.filename}`;
+
+    for (let i = 0; i < items.length; i++) {
+      if (file._id === items[i].file._id) {
+        alreadyAdded = true;
+        currentQty = items[i].qty;
+      }
+    }
 
     return (
       <div className="col-md-12 item-display bg-light text-dark">
@@ -74,12 +93,28 @@ class ItemFields extends Component {
             />
           </div>
           <hr />
-          <button
-            onClick={this.onAddItemClick.bind(this, file, this.state.qty)}
-            className="btn btn-warning"
-          >
-            Add to Basket <i className="fas fa-cart-plus" />
-          </button>
+          {file.metadata !== undefined ? (
+            <button
+              onClick={this.onAddItemClick.bind(
+                this,
+                file,
+                this.state.qty,
+                alreadyAdded,
+
+                file.metadata.price
+              )}
+              className="btn btn-warning"
+            >
+              Add to Basket <i className="fas fa-cart-plus" />
+            </button>
+          ) : null}
+
+          {alreadyAdded === true ? (
+            <div>
+              <hr />
+              <h4>You have already added {currentQty} of this item</h4>
+            </div>
+          ) : null}
         </div>
       </div>
     );
@@ -88,10 +123,16 @@ class ItemFields extends Component {
 
 ItemFields.propTypes = {
   file: PropTypes.object.isRequired,
-  addItem: PropTypes.func.isRequired
+  addItem: PropTypes.func.isRequired,
+  increaseQty: PropTypes.func.isRequired,
+  items: PropTypes.array.isRequired
 };
 
+const mapStateToProps = state => ({
+  items: state.basket.items
+});
+
 export default connect(
-  null,
-  { addItem }
+  mapStateToProps,
+  { addItem, increaseQty }
 )(ItemFields);

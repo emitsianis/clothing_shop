@@ -62,7 +62,7 @@ class BasketItem extends Component {
 
 BasketItem.propTypes = {
   item: PropTypes.object.isRequired,
-  qty: PropTypes.string.isRequired,
+  qty: PropTypes.number.isRequired,
   removeItem: PropTypes.func.isRequired
 };
 
