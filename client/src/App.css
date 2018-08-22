@@ -24,6 +24,18 @@ img {
   padding: 1em;
 }
 
+.main-item-display {
+  display: grid;
+  grid-gap: 30px;
+  grid-template-areas:
+    "picture info"
+    "picture info";
+  grid-template-columns: repeat(2, 1fr);
+
+  border-radius: 15px;
+  padding: 1em;
+}
+
 .item-display-image {
   grid-area: picture;
   margin: 2em 0 2em 0;
@@ -75,11 +87,23 @@ img {
   grid-template-columns: repeat(3, 1fr);
 }
 
+.main-image-container {
+  display: grid;
+  grid-gap: 30px;
+  grid-template-columns: repeat(2, 1fr);
+}
+
 .basket-total {
   border-radius: 15px;
   padding: 2em;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+}
+
+.heading {
+  text-align: center;
+  padding: 1em;
+  border-radius: 15px;
 }
 
 @media (max-width: 500px) {
